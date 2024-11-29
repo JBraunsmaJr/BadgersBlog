@@ -1,0 +1,15 @@
+﻿services:
+  blogsite:
+    image: ghcr.io/jbraunsmajr/badgershugotemplate/badgers-hugo-template:latest
+    container_name: blogsite
+    build:
+      context: .
+    volumes:
+      - "./website:/blogsite/"
+    environment:
+      THEME: ${THEME:-}
+      DEPLOY: ${DEPLOY:-false}
+    ports:
+      - "1313:1313"
+      - "8080:80"
+      - "35729:35729"
