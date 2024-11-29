@@ -1,6 +1,6 @@
 {
   "goSubName": "my-blog",
-  "baseUrl": "/",
+  "baseUrl": "/BadgersBlog",
   "theme": "terminal",
   "themes": [
     {
