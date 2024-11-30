@@ -38,20 +38,6 @@ jobs:
     # We need to delete any old versions of our "pages" branch 
     # This also helps avoid merge conflicts and what not.
     steps:
-      - name: Delete Github Pages Branch
-        uses: dawidd6/action-delete-branch@v3
-        with:
-          github_token: ${{ github.token }}
-          branches: github-pages
-          soft_fail: true
-
-      - name: Delete Github Pages Branch
-        uses: dawidd6/action-delete-branch@v3
-        with:
-          github_token: ${{ github.token }}
-          branches: build
-          soft_fail: true
-
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
@@ -69,6 +55,6 @@ jobs:
           git add .
           git commit -m "New deployment"
           git subtree split --prefix website/public -b github-pages
-
-          git push origin github-pages
+          # Deleting the branch breaks github pages
+          git push --force origin github-pages
 
