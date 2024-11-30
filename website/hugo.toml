@@ -86,17 +86,3 @@ url = "/about"
 identifier = "showcase"
 name = "Showcase"
 url = "/showcase"
-
-[markup]
-[markup.goldmark]
-[markup.goldmark.renderHooks]
-[markup.goldmark.renderHooks.image]
-enableDefault = true
-
-[module]
-[[module.mounts]]
-source = 'assets'
-target = 'assets'
-[[module.mounts]]
-source = 'static'
-target = 'assets'
