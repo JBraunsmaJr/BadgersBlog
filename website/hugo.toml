@@ -56,7 +56,7 @@ site = ""
 [languages]
 [languages.en]
 languageName = "English"
-title = "Terminal"
+title = "Badgers Blog"
 
 [languages.en.params]
 subtitle = "A simple, retro theme for Hugo"
