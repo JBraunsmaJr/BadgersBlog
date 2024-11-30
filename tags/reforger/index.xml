@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reforger on Badgers Blog</title>
+    <link>//localhost:1313/tags/reforger/</link>
+    <description>Recent content in Reforger on Badgers Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 30 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/reforger/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reforger Chunk System</title>
+      <link>//localhost:1313/posts/reforgerchunksystem/</link>
+      <pubDate>Sat, 30 Nov 2024 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/posts/reforgerchunksystem/</guid>
+      <description>&lt;p&gt;When designing the TrainWreck series of mods we created a generic spawn point. We can place this anywhere, such as building
+prefabs, which enables us to spawn units there!&lt;/p&gt;
+&lt;p&gt;We enjoy procedural systems which means we need to programmatically spawn things based on various conditions. One of the
+main conditions is distance! If we&amp;rsquo;re on the Everon map there&amp;rsquo;s over 10,000 spawn points - thanks to overriding vanilla
+prefabs to have our spawn points!&lt;/p&gt;</description>
+      <content>&lt;p&gt;When designing the TrainWreck series of mods we created a generic spawn point. We can place this anywhere, such as building
+prefabs, which enables us to spawn units there!&lt;/p&gt;
+&lt;p&gt;We enjoy procedural systems which means we need to programmatically spawn things based on various conditions. One of the
+main conditions is distance! If we&amp;rsquo;re on the Everon map there&amp;rsquo;s over 10,000 spawn points - thanks to overriding vanilla
+prefabs to have our spawn points!&lt;/p&gt;
+&lt;p&gt;Players don&amp;rsquo;t want enemies spawning within eyesight, nor should they spawn across the map where nothing is happening!
+So how would you go about this?&lt;/p&gt;
+&lt;h2 id=&#34;distance-based-checks&#34;&gt;Distance-based checks&lt;/h2&gt;
+&lt;p&gt;You could iterate over the 10,000+ spawn points PER player to ensure we get a list of &amp;ldquo;valid spawn points&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pros:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Super simple to write&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Cons:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Expensive to run because we need to perform a distance calculation PER player to spawn point&lt;/li&gt;
+&lt;li&gt;Can&amp;rsquo;t run often (must be infrequent to avoid performance hiccups)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;worldwide checks&#34; src=&#34;//localhost:1313/images/reforger/worldwide.gif&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;radius-checks&#34;&gt;Radius Checks&lt;/h2&gt;
+&lt;p&gt;Can use the engine&amp;rsquo;s built-in query entities in sphere approach. This still performs distance checks, however we&amp;rsquo;d also need
+to perform secondary checks to ensure they are outside a &lt;em&gt;minimum spawn radius&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;radius checks&#34; src=&#34;//localhost:1313/images/reforger/radius.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Although we experienced a slight improvement over the distance-based checks, it was still not performant!&lt;/p&gt;
+&lt;h2 id=&#34;chunk-system&#34;&gt;Chunk System&lt;/h2&gt;
+&lt;p&gt;I hope everyone is familiar with Minecraft by now. Similar to how Minecraft&amp;rsquo;s chunk system works I designed a way to isolate
+groups of whatever I want into a grid system.&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;chunk checks&#34; src=&#34;//localhost:1313/images/reforger/chunks.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;It works in the following way:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Register a grid manager to a grid size. For instance, 250 meters. This means we end up with grid squares of 250x250.&lt;/li&gt;
+&lt;li&gt;Register something to the grid
+&lt;ul&gt;
+&lt;li&gt;Divide position by grid size. Let&amp;rsquo;s say we&amp;rsquo;re at 1000,1000. Divide by 250 is 4, 4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now we can take a list of our players and perform lookups quite easily!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Divide player position by the grid size of our grid manager.&lt;/li&gt;
+&lt;li&gt;Get the chunk the player is in
+&lt;ul&gt;
+&lt;li&gt;Want more? Want to grab neighboring chunks too! Too easy&amp;hellip; just add and subtract the grid coordinates to grab neighboring chunks! No comparisons! No complex computations!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Okay, although this system was by far, orders of magnitude faster, it introduced a problem&amp;hellip; Now we had enemies spawning
+everywhere around players - great, but also bad because it could be right next to you!&lt;/p&gt;
+&lt;p&gt;Do we really want to do a distance check against players before &amp;ldquo;spawning&amp;rdquo; on a spawn point that we considered &amp;ldquo;okay&amp;rdquo;? &amp;hellip; heck no.&lt;/p&gt;
+&lt;p&gt;This became the introduction of &amp;ldquo;dead zones&amp;rdquo;, the idea that &amp;ldquo;these coordinates&amp;rdquo; are &amp;ldquo;too close&amp;rdquo; to a player. Thus,
+when grabbing spawn points we have two sets of configurable values. The chunk radius for getting spawn points, and a &amp;ldquo;dead chunk radius&amp;rdquo;
+where anything in these chunks are off limits. When retrieving a list of valid items we provide the dead zone radius as well.
+Anything that falls within this dead zone is skipped, thus our list of items becomes something we don&amp;rsquo;t need to do checks on!&lt;/p&gt;
+&lt;p&gt;For performance reasons we can store player coordinates, and anti spawn chunks in a hashmap. At a configurable interval we can &amp;ldquo;monitor&amp;rdquo; those
+positions and update as appropriate. We only need to recalculate certain things when player positions changed, like spawn points!&lt;/p&gt;
+&lt;p&gt;This system was such a performance increase from former versions that it allowed us to check every 2 seconds where players were and spawn units
+around them appropriately! IronMist and myself would be cruising down a road blowing through towns. As we&amp;rsquo;d be approaching new areas we&amp;rsquo;d
+be encountering enemies! Former systems didn&amp;rsquo;t allow this. It would take a while before enemies would start spawning.&lt;/p&gt;
+&lt;p&gt;Since we have a hashmap of chunks where players are, and where things can spawn&amp;hellip; we can easily unload chunks as well! Garbage collecting
+any unit that&amp;rsquo;s out of action.&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
