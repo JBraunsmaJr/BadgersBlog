@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reforger on Badgers Blog</title>
-    <link>//localhost:1313/tags/reforger/</link>
+    <link>/BadgersBlog/tags/reforger/</link>
     <description>Recent content in Reforger on Badgers Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 30 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/reforger/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="/BadgersBlog/tags/reforger/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reforger Chunk System</title>
-      <link>//localhost:1313/posts/reforgerchunksystem/</link>
+      <link>/BadgersBlog/posts/reforgerchunksystem/</link>
       <pubDate>Sat, 30 Nov 2024 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/posts/reforgerchunksystem/</guid>
+      <guid>/BadgersBlog/posts/reforgerchunksystem/</guid>
       <description>&lt;p&gt;When designing the TrainWreck series of mods we created a generic spawn point. We can place this anywhere, such as building
 prefabs, which enables us to spawn units there!&lt;/p&gt;
 &lt;p&gt;We enjoy procedural systems which means we need to programmatically spawn things based on various conditions. One of the
@@ -36,16 +36,16 @@ So how would you go about this?&lt;/p&gt;
 &lt;li&gt;Expensive to run because we need to perform a distance calculation PER player to spawn point&lt;/li&gt;
 &lt;li&gt;Can&amp;rsquo;t run often (must be infrequent to avoid performance hiccups)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt=&#34;worldwide checks&#34; src=&#34;//localhost:1313/images/reforger/worldwide.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;worldwide checks&#34; src=&#34;/BadgersBlog/BadgersBlog/images/reforger/worldwide.gif&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;radius-checks&#34;&gt;Radius Checks&lt;/h2&gt;
 &lt;p&gt;Can use the engine&amp;rsquo;s built-in query entities in sphere approach. This still performs distance checks, however we&amp;rsquo;d also need
 to perform secondary checks to ensure they are outside a &lt;em&gt;minimum spawn radius&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;radius checks&#34; src=&#34;//localhost:1313/images/reforger/radius.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;radius checks&#34; src=&#34;/BadgersBlog/BadgersBlog/images/reforger/radius.gif&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Although we experienced a slight improvement over the distance-based checks, it was still not performant!&lt;/p&gt;
 &lt;h2 id=&#34;chunk-system&#34;&gt;Chunk System&lt;/h2&gt;
 &lt;p&gt;I hope everyone is familiar with Minecraft by now. Similar to how Minecraft&amp;rsquo;s chunk system works I designed a way to isolate
 groups of whatever I want into a grid system.&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;chunk checks&#34; src=&#34;//localhost:1313/images/reforger/chunks.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;chunk checks&#34; src=&#34;/BadgersBlog/BadgersBlog/images/reforger/chunks.gif&#34;&gt;&lt;/p&gt;
 &lt;p&gt;It works in the following way:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Register a grid manager to a grid size. For instance, 250 meters. This means we end up with grid squares of 250x250.&lt;/li&gt;

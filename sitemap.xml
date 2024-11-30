@@ -2,30 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/</loc>
+    <loc>/BadgersBlog/</loc>
     <lastmod>2024-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/enfusion-engine/</loc>
+    <loc>/BadgersBlog/tags/enfusion-engine/</loc>
     <lastmod>2024-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/</loc>
+    <loc>/BadgersBlog/posts/</loc>
     <lastmod>2024-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/reforger/</loc>
+    <loc>/BadgersBlog/tags/reforger/</loc>
     <lastmod>2024-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/posts/reforgerchunksystem/</loc>
+    <loc>/BadgersBlog/posts/reforgerchunksystem/</loc>
     <lastmod>2024-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/spawn-system/</loc>
+    <loc>/BadgersBlog/tags/spawn-system/</loc>
     <lastmod>2024-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/</loc>
+    <loc>/BadgersBlog/tags/</loc>
     <lastmod>2024-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/tags/trainwreck/</loc>
+    <loc>/BadgersBlog/tags/trainwreck/</loc>
     <lastmod>2024-11-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>//localhost:1313/categories/</loc>
+    <loc>/BadgersBlog/categories/</loc>
   </url>
 </urlset>
