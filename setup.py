@@ -210,7 +210,7 @@ if args.build is True:
     )
 
     updated_content = re.sub(
-        r'(?m)^logoHomeLink\s*=\s*".*"',  # Match 'baseurl = "<value>"' at the beginning of the line
+        r'(?m)logoHomeLink\s*=\s*".*"',  # Match 'baseurl = "<value>"' at the beginning of the line
         f'logoHomeLink = "{base_url}"',  # Replace with the new baseurl        
         updated_content
     )
